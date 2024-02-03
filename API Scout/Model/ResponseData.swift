@@ -1,0 +1,23 @@
+//
+//  ResponseData.swift
+//  API Scout
+//
+//  Created by Lucas on 2/3/24.
+//
+
+import Foundation
+
+struct ResponseData {
+    var body: Data?
+    var response: URLResponse?
+    var error: Error?
+    
+    var decodedBody: String? {
+        return if body != nil {
+            // TODO dynamic decoding
+            String(decoding: body!, as: UTF8.self)
+        } else {
+            nil
+        }
+    }
+}

@@ -1,0 +1,34 @@
+[
+    {
+        "id": "e6bc3a82-d5fc-44fe-b161-0087cf021378",
+        "name": "Something",
+        "method": "GET",
+        "bodyType": "JSON",
+        "url": "https://img.shields.io/endpoint",
+        "bodyData": "{\n\t\"field1\": 1,\n\t\"field2\": \"asdf\"\n}"
+    },
+    {
+        "id": "e6bc3a82-d5fc-44fe-b161-0087cf021379",
+        "name": "Something Else",
+        "method": "DELETE",
+        "bodyType": "NONE",
+        "url": "https://google.com",
+        "bodyData": ""
+    },
+    {
+        "id": "e6bc3a82-d5fc-44fe-b161-0087cf021377",
+        "name": "Another thing",
+        "method": "POST",
+        "bodyType": "PLAIN",
+        "url": "https://Doofus.dinkleberg",
+        "bodyData": "How many cookies in the cookie jar"
+    },
+    {
+        "id": "e6bc3a82-d5fc-44fe-b161-0087cf021375",
+        "name": "Wow even more",
+        "method": "PUT",
+        "bodyType": "JSON",
+        "url": "https://heehee.co.uk",
+        "bodyData": "{\n\t\"Ive been\": 1,\n\t\"to hell and back\": \"asdf\"\n}"
+    },
+]
