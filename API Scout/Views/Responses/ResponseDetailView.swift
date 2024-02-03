@@ -10,13 +10,14 @@ import SwiftUI
 struct ResponseDetailView: View {
     @Binding var requestHasBeenRun: Bool
     @Binding var responseData: ResponseData
+    @State private var selectedTab: Int = 1
     
     var body: some View {
         TabView(
-            selection: .constant(1),
+            selection: $selectedTab,
             content:  {
                 ResponseBody(requestHasBeenRun: $requestHasBeenRun, responseData: $responseData).tabItem { Text("Body") }.tag(1)
-                Text("Tab Content 2").tabItem { Text("Headers") }.tag(2)
+                ResponseHeaders(responseData: $responseData).tabItem { Text("Headers") }.tag(2)
             }
         ).frame(minWidth: 500)
     }

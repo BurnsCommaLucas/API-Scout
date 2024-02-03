@@ -12,6 +12,7 @@ struct RequestDetailView: View {
     @Binding var requestHasBeenRun: Bool
     @Binding var responseContents: ResponseData
     @State private var editingRequestTitle: Bool = false
+    @State private var selectedTab: Int = 1
     
     var body: some View {
         VStack {
@@ -54,7 +55,7 @@ struct RequestDetailView: View {
                         .labelStyle(.iconOnly)
                 }
             }
-            TabView(selection: .constant(1),
+            TabView(selection: $selectedTab,
                     content:  {
                 BodyEditorView(
                     selectedBodyType: $request.bodyType,
@@ -62,8 +63,8 @@ struct RequestDetailView: View {
                 )
                 .tabItem { Text("Body") }.tag(1)
                 Text("Tab Content 2").tabItem { Text("Auth") }.tag(2)
-                Text("Tab Content 3").tabItem { Text("Query") }.tag(2)
-                Text("Tab Content 4").tabItem { Text("Headers") }.tag(2)
+                Text("Tab Content 3").tabItem { Text("Query") }.tag(3)
+                Text("Tab Content 4").tabItem { Text("Headers") }.tag(4)
             })
         }
         .padding()

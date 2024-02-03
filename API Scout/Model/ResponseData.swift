@@ -20,4 +20,13 @@ struct ResponseData {
             nil
         }
     }
+    
+    var headers: [AnyHashable : Any]? {
+        return if let httpResponse = response as? HTTPURLResponse  {
+            httpResponse.allHeaderFields
+        }
+        else {
+            nil
+        }
+    }
 }

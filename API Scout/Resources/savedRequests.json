@@ -18,9 +18,9 @@
     {
         "id": "e6bc3a82-d5fc-44fe-b161-0087cf021377",
         "name": "Another thing",
-        "method": "POST",
+        "method": "GET",
         "bodyType": "PLAIN",
-        "url": "https://Doofus.dinkleberg",
+        "url": "http://localhost:8080",
         "bodyData": "How many cookies in the cookie jar"
     },
     {
