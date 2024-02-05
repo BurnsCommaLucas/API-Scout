@@ -21,5 +21,9 @@ struct RequestRow: View {
 }
 
 #Preview {
-    RequestRow(request: Request())
+    Group {
+        RequestRow(request: Request())
+        RequestRow(request: Request(name: "Hit Endpoint", method: .POST))
+        RequestRow(request: Request(method: .PUT))
+    }
 }

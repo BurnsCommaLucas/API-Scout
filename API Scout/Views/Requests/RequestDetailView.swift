@@ -54,6 +54,7 @@ struct RequestDetailView: View {
                     Label("Send", systemImage: "paperplane")
                         .labelStyle(.iconOnly)
                 }
+                .keyboardShortcut(KeyboardShortcut(KeyEquivalent.return, modifiers: EventModifiers.command))
             }
             TabView(selection: $selectedTab,
                     content:  {
@@ -75,8 +76,8 @@ struct RequestDetailView: View {
 
 #Preview{
     RequestDetailView(
-        request: .constant(Request()),
-        requestHasBeenRun: .constant(false),
-        responseContents: .constant(ResponseData())
+        request: .constant(Request(bodyData: sampleJson)),
+        requestHasBeenRun: .constant(true),
+        responseContents: .constant(ResponseData(body: sampleBody, response: sampleResponse))
     )
 }

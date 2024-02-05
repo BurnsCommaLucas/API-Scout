@@ -25,7 +25,7 @@ enum BodyType: String, Codable, CaseIterable, Identifiable{
         }
     }
     
-    var headerString: String? {
+    var headerValue: String? {
         switch self {
         case .PLAIN:
             return "text/plain"

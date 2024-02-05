@@ -29,4 +29,12 @@ struct ResponseData {
             nil
         }
     }
+    
+    var statusCode: Int? {
+        return if let httpResponse = response as? HTTPURLResponse {
+            httpResponse.statusCode
+        } else {
+            nil
+        }
+    }
 }

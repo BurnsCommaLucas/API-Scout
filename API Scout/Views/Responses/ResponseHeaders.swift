@@ -15,24 +15,27 @@ struct ResponseHeaders: View {
         if let headers: Dictionary<AnyHashable, Any?> = responseData.headers {
             // Remap the headers to something usable by the Table
             let headerArray = headers.map { (key: AnyHashable, value: Any?) in
-                HeaderTableEntry(name: "\(key)", value: "\(value ?? "")")
+                HeaderTableEntry(id: "\(key)", value: "\(value ?? "")")
+            }.sorted { a, b in
+                a.id < b.id
             }
             
 //            let clipboard = NSPasteboard.general
             
             Table(headerArray) {
-                TableColumn("Name", value: \.name)
+                TableColumn("Name", value: \.id)
                 TableColumn("Value", value: \.value)
 //                TableColumn("") { e in
 //                    Button {
-//                        clipboard.setString("\(e.name): \(e.value)", forType: .string)
+//                        clipboard.setString("\(e.id): \(e.value)", forType: .string)
 //                    } label: {
 //                        Label("Copy", systemImage: "doc.on.doc").labelStyle(.iconOnly)
 //                    }
 //                }
             }
-            .selectionDisabled(false)
-            .monospaced()
+            .textSelection(.enabled)
+            .font(.custom("Menlo", size: 12))
+//            .monospaced()
             .padding()
         } else {
             Text("No Headers")
@@ -42,8 +45,7 @@ struct ResponseHeaders: View {
 }
 
 private struct HeaderTableEntry: Identifiable {
-    var id: UUID = UUID()
-    var name: String
+    var id: String
     var value: String
 }
 

@@ -20,6 +20,7 @@ struct ContentView: View {
                 .frame(minWidth: 200)
         } content: {
             Text("Select a Request")
+                .frame(minWidth: 500)
         } detail: {
             ResponseDetailView(
                 requestHasBeenRun: $requestHasBeenRun,

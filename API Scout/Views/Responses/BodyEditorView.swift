@@ -7,10 +7,15 @@
 
 import SwiftUI
 import AppKit
+import CodeEditor
 
 struct BodyEditorView: View {
+    
     @Binding var selectedBodyType: BodyType
     @Binding var selectedBodyData: String
+    @State var textVisual: NSAttributedString = NSAttributedString()
+    
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack{
@@ -19,15 +24,16 @@ struct BodyEditorView: View {
                     Text(bodyType.friendlyName)
                 }
             }
-            TextEditor(text: $selectedBodyData)
-                .font(.custom("AndaleMono", size: 12))
-                .allowsTightening(false)
-                .disabled($selectedBodyType.wrappedValue == BodyType.NONE)
-                .opacity($selectedBodyType.wrappedValue == BodyType.NONE ? 0.5 : 1.0)
+            CodeEditor(
+                source: $selectedBodyData,
+                language: .json,
+                // TODO customizable theme
+                flags: .defaultEditorFlags
+            )
         }.padding()
     }
 }
 
 #Preview {
-    BodyEditorView(selectedBodyType: .constant(BodyType.NONE), selectedBodyData: .constant("asdf"))
+    BodyEditorView(selectedBodyType: .constant(BodyType.JSON), selectedBodyData: .constant(sampleJson))
 }
