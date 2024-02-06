@@ -14,6 +14,6 @@ struct Request: Hashable, Codable, Identifiable {
     var url: String = ""
     var bodyType: BodyType = BodyType.NONE
     var bodyData: String = ""
-    // TODO arbitrary headers
+    var headers: [HeaderEntry] = [HeaderEntry()]
     // TODO auth
 }

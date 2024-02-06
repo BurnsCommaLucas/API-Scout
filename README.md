@@ -21,7 +21,7 @@ This isn't an exhaustive list – though it is an exhausting list to write (ba d
     - [ ] Editor bracket/quote auto-close
     - [ ] Light/dark themes[^2]
 - [ ] Requests
-  - [ ] Custom headers
+  - [x] Custom headers
   - [ ] Query param editor
   - [ ] Editor highlighting based on selected body type
   - [ ] Encoding based on `Content-Type` header

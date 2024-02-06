@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A0172CA52B70B52D000DED9C /* CodeEditor in Frameworks */ = {isa = PBXBuildFile; productRef = A0172CA42B70B52D000DED9C /* CodeEditor */; };
+		A09082812B71828B00056AD2 /* HeaderEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09082802B71828B00056AD2 /* HeaderEditor.swift */; };
+		A09082832B7182D600056AD2 /* HeaderEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09082822B7182D600056AD2 /* HeaderEntry.swift */; };
 		A0F423F42B6ECBBF00E37194 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F423F32B6ECBBF00E37194 /* ResponseData.swift */; };
 		A0F423F62B6ED5C700E37194 /* ResponseHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F423F52B6ED5C700E37194 /* ResponseHeaders.swift */; };
 		A0F423F82B6F079300E37194 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A0F423F72B6F079300E37194 /* README.md */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A09082802B71828B00056AD2 /* HeaderEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderEditor.swift; sourceTree = "<group>"; };
+		A09082822B7182D600056AD2 /* HeaderEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderEntry.swift; sourceTree = "<group>"; };
 		A0F423F32B6ECBBF00E37194 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		A0F423F52B6ED5C700E37194 /* ResponseHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHeaders.swift; sourceTree = "<group>"; };
 		A0F423F72B6F079300E37194 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		A0F8A1A42B6E0D5200971754 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A09082822B7182D600056AD2 /* HeaderEntry.swift */,
 				A0F8A1A52B6E0D5200971754 /* BodyType.swift */,
 				A0F8A1A62B6E0D5200971754 /* HTTPMethod.swift */,
 				A0F8A1A72B6E0D5200971754 /* Request.swift */,
@@ -169,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				A0F4241B2B6F48CF00E37194 /* StatusCode.swift */,
+				A09082802B71828B00056AD2 /* HeaderEditor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -274,7 +280,9 @@
 				A0F8A1AD2B6E0D5200971754 /* Globals.swift in Sources */,
 				A0F8A1AF2B6E0D5200971754 /* HTTPMethod.swift in Sources */,
 				A0F8A1C02B6E0D5C00971754 /* RequestRow.swift in Sources */,
+				A09082832B7182D600056AD2 /* HeaderEntry.swift in Sources */,
 				A0F8A1C12B6E0D5C00971754 /* RequestDetailView.swift in Sources */,
+				A09082812B71828B00056AD2 /* HeaderEditor.swift in Sources */,
 				A0F8A1412B6E0CA300971754 /* API_ScoutApp.swift in Sources */,
 				A0F423F62B6ED5C700E37194 /* ResponseHeaders.swift in Sources */,
 				A0F8A1C92B6E10AF00971754 /* ResponseBody.swift in Sources */,

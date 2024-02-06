@@ -15,7 +15,6 @@ struct RequestRunner {
 
     /// Runs the request bound to the ``RequestRunner`` and updates other bound variables as appropriate with the result of that run
     func run() {
-        // create get request
         guard let url: URL = URL(string: selectedRequest.url) else {
             print("Invalid URL \(selectedRequest.url)")
             return
@@ -27,7 +26,16 @@ struct RequestRunner {
         if selectedRequest.bodyType != .NONE && selectedRequest.method != .GET {
             // TODO allow encoding selection?
             request.httpBody = selectedRequest.bodyData.data(using: .utf8)
+
+            // Set this before general headers to allow overriding... I guess? probably a nicer way to do this
             request.setValue(selectedRequest.bodyType.headerValue, forHTTPHeaderField: "Content-Type")
+        }
+        
+        // TODO test if this can override important headers like auth
+        selectedRequest.headers.forEach { header in
+            if header.enabled {
+                request.setValue(header.value, forHTTPHeaderField: header.name)
+            }
         }
         
         let session = URLSession(configuration: .ephemeral)

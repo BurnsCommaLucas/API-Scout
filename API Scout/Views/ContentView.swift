@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    //    @Environment(ModelData.self) var modelData: ModelData
     @State private var allRequests: [Request] = requests
     @State private var requestHasBeenRun: Bool = false
     @State private var responseContents: ResponseData = ResponseData()
-    //    @State private var requestResult: Any? = nil
     
     var body: some View {
         NavigationSplitView{

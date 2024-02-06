@@ -65,7 +65,7 @@ struct RequestDetailView: View {
                 .tabItem { Text("Body") }.tag(1)
                 Text("Tab Content 2").tabItem { Text("Auth") }.tag(2)
                 Text("Tab Content 3").tabItem { Text("Query") }.tag(3)
-                Text("Tab Content 4").tabItem { Text("Headers") }.tag(4)
+                HeaderEditor(request: $request).tabItem { Text("Headers") }.tag(4)
             })
         }
         .padding()

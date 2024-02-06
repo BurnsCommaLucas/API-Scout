@@ -10,20 +10,23 @@ import SwiftUI
 struct ResponseHeaders: View {
     @Binding var responseData: ResponseData
     
+    @State private var selectedRows = Set<UUID>()
+    @State private var sortOrder = [KeyPathComparator(\HeaderEntry.name)]
+    
     var body: some View {
         
         if let headers: Dictionary<AnyHashable, Any?> = responseData.headers {
             // Remap the headers to something usable by the Table
             let headerArray = headers.map { (key: AnyHashable, value: Any?) in
-                HeaderTableEntry(id: "\(key)", value: "\(value ?? "")")
+                HeaderEntry(name: "\(key)", value: "\(value ?? "")")
             }.sorted { a, b in
                 a.id < b.id
             }
             
 //            let clipboard = NSPasteboard.general
             
-            Table(headerArray) {
-                TableColumn("Name", value: \.id)
+            Table(headerArray, selection: $selectedRows) {
+                TableColumn("Name", value: \.name)
                 TableColumn("Value", value: \.value)
 //                TableColumn("") { e in
 //                    Button {
@@ -34,21 +37,14 @@ struct ResponseHeaders: View {
 //                }
             }
             .textSelection(.enabled)
-            .font(.custom("Menlo", size: 12))
-//            .monospaced()
+            .font(monoFont)
             .padding()
         } else {
             Text("No Headers")
         }
-
     }
 }
 
-private struct HeaderTableEntry: Identifiable {
-    var id: String
-    var value: String
-}
-
 #Preview {
-    ResponseHeaders(responseData: .constant(ResponseData()))
+    ResponseHeaders(responseData: .constant(ResponseData(body: sampleBody, response: sampleResponse)))
 }

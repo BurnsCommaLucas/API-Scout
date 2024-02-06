@@ -5,7 +5,8 @@
         "method": "GET",
         "bodyType": "JSON",
         "url": "https://img.shields.io/endpoint",
-        "bodyData": "{\n\t\"field1\": 1,\n\t\"field2\": \"asdf\"\n}"
+        "bodyData": "{\n\t\"field1\": 1,\n\t\"field2\": \"asdf\"\n}",
+        "headers": []
     },
     {
         "id": "e6bc3a82-d5fc-44fe-b161-0087cf021379",
@@ -13,7 +14,8 @@
         "method": "DELETE",
         "bodyType": "NONE",
         "url": "https://google.com",
-        "bodyData": ""
+        "bodyData": "",
+        "headers": []
     },
     {
         "id": "e6bc3a82-d5fc-44fe-b161-0087cf021377",
@@ -21,7 +23,8 @@
         "method": "GET",
         "bodyType": "PLAIN",
         "url": "http://localhost:8080",
-        "bodyData": "How many cookies in the cookie jar"
+        "bodyData": "How many cookies in the cookie jar",
+        "headers": []
     },
     {
         "id": "e6bc3a82-d5fc-44fe-b161-0087cf021375",
@@ -29,6 +32,7 @@
         "method": "PUT",
         "bodyType": "JSON",
         "url": "https://heehee.co.uk",
-        "bodyData": "{\n\t\"Ive been\": 1,\n\t\"to hell and back\": \"asdf\"\n}"
+        "bodyData": "{\n\t\"Ive been\": 1,\n\t\"to hell and back\": \"asdf\"\n}",
+        "headers": []
     },
 ]
