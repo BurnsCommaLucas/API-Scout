@@ -19,7 +19,7 @@ struct ResponseHeaders: View {
             let headerArray = headers.map { (key: AnyHashable, value: Any?) in
                 HeaderEntry(name: "\(key)", value: "\(value ?? "")")
             }.sorted { a, b in
-                a.id < b.id
+                a.name < b.name
             }
             
             Table(headerArray, selection: $selectedRows) {
