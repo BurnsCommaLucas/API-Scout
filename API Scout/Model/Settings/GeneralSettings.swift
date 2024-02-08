@@ -14,8 +14,8 @@ class GeneralSettings: ObservableObject {
     @AppStorage("darkTheme") var darkTheme = "a11y-dark"
     @AppStorage("syncThemes") var syncThemes = false
     
-    func currentTheme(currentScheme: ColorScheme) -> CodeEditor.ThemeName {
-        switch currentScheme {
+    func currentThemeName(colorScheme: ColorScheme) -> CodeEditor.ThemeName {
+        switch colorScheme {
         case .dark:
             return CodeEditor.ThemeName(rawValue: syncThemes ? lightTheme : darkTheme)
         case .light:

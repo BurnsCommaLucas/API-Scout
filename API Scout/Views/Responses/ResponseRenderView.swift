@@ -9,9 +9,10 @@ import SwiftUI
 import CodeEditor
 import WebKit
 
+// FIXME: Invalidate/re-render when request is re-run
 struct ResponseRenderView: View {
-    @Binding var request: Request?
-    @Binding var responseData: ResponseData
+    var request: Request?
+    var responseData: ResponseData
     
     var body: some View {
         if let body = responseData.decodedBody {
@@ -22,7 +23,9 @@ struct ResponseRenderView: View {
 
 #Preview {
     ResponseRenderView(
-        request: .constant(Request(url: "https://img.shields.io")),
-        responseData: .constant(ResponseData(body: sampleHtmlData, response: sampleResponse))
+        request: Request(
+            id: "", name: "", method: .GET, url: "https://img.shields.io", bodyType: .PLAIN, bodyData: "", headers: []
+        ),
+        responseData: ResponseData(body: sampleHtmlData, response: sampleResponse)
     )
 }

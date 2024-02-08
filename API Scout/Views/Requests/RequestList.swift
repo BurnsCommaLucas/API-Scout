@@ -6,32 +6,51 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RequestList: View {
-    @Binding var allRequests: [Request]
+    @Environment(\.modelContext) private var modelContext
+    @Query private var allRequests: [Request]
     @Binding var requestHasBeenRun: Bool
     @Binding var responseContents: ResponseData
     
     var body: some View {
-        List($allRequests) { $request in
-            NavigationLink {
-                RequestDetailView(
-                    request: $request,
-                    requestHasBeenRun: $requestHasBeenRun,
-                    responseContents: $responseContents
-                )
-            } label: {
-                RequestRow(request: request)
+        List{
+            ForEach(allRequests) { request in
+                NavigationLink {
+                    RequestDetailView(
+                        requestHasBeenRun: $requestHasBeenRun,
+                        responseContents: $responseContents
+                    ).environmentObject(request)
+                } label: {
+                    RequestRow(request: request)
+                }
+            }.onDelete(perform: deleteItems)
+        }
+        .navigationTitle("Requests")
+        .toolbar {
+            ToolbarItem {
+                Button("Delete", systemImage: "minus", action: {
+                    
+                })
+
             }
-        }.navigationTitle("Requests")
-            .frame(minWidth: 200)
+        }
+    }
+    
+    // Pretty weird having this function not be next to addItems in `ContentView` tbh
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(allRequests[index])
+            }
+        }
     }
 }
 
 #Preview {
     RequestList(
-        allRequests: .constant([Request(), Request()]),
         requestHasBeenRun: .constant(true),
         responseContents: .constant(ResponseData())
-    )
+    ).modelContainer(for: Request.self, inMemory: true)
 }

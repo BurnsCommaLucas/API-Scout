@@ -9,7 +9,7 @@ import SwiftUI
 import CodeEditor
 
 struct ResponseRawView: View {
-    @Binding var responseData: ResponseData
+    var responseData: ResponseData
 
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var generalSettings: GeneralSettings
@@ -19,7 +19,7 @@ struct ResponseRawView: View {
             CodeEditor(
                 source: .constant(decodedBody),
                 language: responseData.contentTypeLanguage,
-                theme: generalSettings.currentTheme(currentScheme: colorScheme),
+                theme: generalSettings.currentThemeName(colorScheme: colorScheme),
                 flags: .defaultViewerFlags
             )
             .padding()
@@ -30,6 +30,6 @@ struct ResponseRawView: View {
 }
 
 #Preview {
-    ResponseRawView(responseData: .constant(ResponseData(body: sampleSvgData)))
+    ResponseRawView(responseData: ResponseData(body: sampleSvgData))
         .environmentObject(GeneralSettings())
 }

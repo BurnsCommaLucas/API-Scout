@@ -23,7 +23,11 @@ struct RequestRow: View {
 #Preview {
     Group {
         RequestRow(request: Request())
-        RequestRow(request: Request(name: "Hit Endpoint", method: .POST))
-        RequestRow(request: Request(method: .PUT))
+        RequestRow(request: Request(
+            id: "", name: "Hit Endpoint", method: .POST, url: "", bodyType: .JSON, bodyData: "", headers: []
+        ))
+        RequestRow(request: Request(
+            id: "", name: "Hit Endpoint", method: .PUT, url: "", bodyType: .JSON, bodyData: "", headers: []
+        ))
     }
 }

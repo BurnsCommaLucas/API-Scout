@@ -30,7 +30,7 @@ struct BodyEditorView: View {
             CodeEditor(
                 source: $selectedBodyData,
                 language: selectedBodyType.codeEditorLanguage,
-                theme: generalSettings.currentTheme(currentScheme: colorScheme),
+                theme: generalSettings.currentThemeName(colorScheme: colorScheme),
                 flags: .defaultEditorFlags
             )
             .disabled(selectedBodyType == .NONE)

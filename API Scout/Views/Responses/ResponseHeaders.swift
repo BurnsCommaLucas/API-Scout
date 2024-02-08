@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResponseHeaders: View {
-    @Binding var responseData: ResponseData
+    var responseData: ResponseData
     
     @State private var selectedRows = Set<UUID>()
     
@@ -36,5 +36,5 @@ struct ResponseHeaders: View {
 }
 
 #Preview {
-    ResponseHeaders(responseData: .constant(ResponseData(body: sampleBodyData, response: sampleResponse)))
+    ResponseHeaders(responseData: ResponseData(body: sampleBodyData, response: sampleResponse))
 }

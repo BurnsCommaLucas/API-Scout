@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct RequestRunner {
-    @Binding var selectedRequest: Request
+    var selectedRequest: Request
     @Binding var requestHasBeenRun: Bool
     @Binding var responseContents: ResponseData
 

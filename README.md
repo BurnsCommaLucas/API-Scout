@@ -6,7 +6,7 @@ Currently handles a very minimal set of functionality and is not a well-behaved 
 
 This is both the first Mac App and the first Swift I have written. If you have interest in this product, please bear with me as I learn.
 
-As much of the UI as possible is written with SwiftUI just because that's proven to be the simplest for 90% of what I want this app to do. Turns out [ATP](https://atp.fm) was right, SwiftUI is really great until you find something it can't do, and then it's back down to AppKit.[^1]
+As much of the UI as possible is written with SwiftUI just because that's proven to be the simplest for 90% of what I want this app to do. Turns out [ATP](https://atp.fm/491) was right, SwiftUI is really great until you find something it can't do, and then it's back down to AppKit.[^1]
 
 ## Planned Additions & Improvements
 

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct RequestDetailView: View {
-    @Binding var request: Request
     @Binding var requestHasBeenRun: Bool
     @Binding var responseContents: ResponseData
     @State private var editingRequestTitle: Bool = false
     @State private var selectedTab: Int = 1
+    @EnvironmentObject var request: Request
     
     var body: some View {
         VStack {
@@ -20,6 +20,9 @@ struct RequestDetailView: View {
                 HStack {
                     if editingRequestTitle {
                         TextField("", text: $request.name)
+                            .onSubmit {
+                                editingRequestTitle.toggle()
+                            }
                     } else {
                         Text(request.name == "" ? "New Request" : request.name)
                             .font(.title3)
@@ -46,7 +49,7 @@ struct RequestDetailView: View {
                     TextField("URL:", text: $request.url)
                     Button() {
                         RequestRunner(
-                            selectedRequest: $request,
+                            selectedRequest: request,
                             requestHasBeenRun: $requestHasBeenRun,
                             responseContents: $responseContents
                         ).run()
@@ -65,9 +68,11 @@ struct RequestDetailView: View {
                     selectedBodyData: $request.bodyData
                 )
                 .tabItem { Text("Body") }.tag(1)
-                Text("Tab Content 2").tabItem { Text("Auth") }.tag(2)
-                Text("Tab Content 3").tabItem { Text("Query") }.tag(3)
-                HeaderEditor(request: $request).tabItem { Text("Headers") }.tag(4)
+                // TODO: Auth
+//                Text("Tab Content 2").tabItem { Text("Auth") }.tag(2)
+                // TODO: Query param parsing/building
+//                Text("Tab Content 3").tabItem { Text("Query") }.tag(3)
+                HeaderEditor().tabItem { Text("Headers") }.tag(4)
             })
         }
         .padding()
@@ -78,8 +83,9 @@ struct RequestDetailView: View {
 
 #Preview{
     RequestDetailView(
-        request: .constant(Request(bodyType: .JSON, bodyData: sampleJson)),
         requestHasBeenRun: .constant(true),
         responseContents: .constant(ResponseData(body: sampleBodyData, response: sampleResponse))
-    ).environmentObject(GeneralSettings())
+    )
+    .environmentObject(GeneralSettings())
+    .environmentObject(Request(id: "", name: "", method: .GET, url: "", bodyType: .JSON, bodyData: sampleJson, headers: []))
 }

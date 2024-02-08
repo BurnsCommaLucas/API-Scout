@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import CodeEditor
+import Highlightr
 
 struct HeaderEditor: View {
-    @Binding var request: Request
     @State private var selectedRow: UUID? = nil
     @FocusState private var focus: Bool
+    @EnvironmentObject var request: Request
+    @EnvironmentObject var generalSettings: GeneralSettings
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack {
@@ -23,7 +27,10 @@ struct HeaderEditor: View {
                     Spacer()
                     
                     // Body
+                    // TODO: Show the auth header inline here
+                    // TODO: Show the content type header inline here
                     ForEach($request.headers) { $h in
+                        // TODO: Make these blend in with the editor styles
                         TextField(text: $h.name, label: {})
                             .font(monoFont)
                         TextField(text: $h.value, label: {})
@@ -76,6 +83,10 @@ struct HeaderEditor_Previews : PreviewProvider{
         HeaderEntry(name: "User-Agent", value: "API-Scout")
     ]
     static var previews: some View {
-        HeaderEditor(request: .constant(Request(headers: headers)))
+        HeaderEditor()
+            .environmentObject(Request(
+                id: "", name: "", method: .POST, url: "", bodyType: .PLAIN, bodyData: "", headers: headers
+            ))
+            .environmentObject(GeneralSettings())
     }
 }
