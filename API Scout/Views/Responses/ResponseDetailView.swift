@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ResponseDetailView: View {
+    @Binding var request: Request?
     @Binding var requestHasBeenRun: Bool
     @Binding var responseData: ResponseData
     @State private var selectedTab: Int = 1
@@ -23,16 +24,36 @@ struct ResponseDetailView: View {
                 TabView(
                     selection: $selectedTab,
                     content:  {
-                        ResponseBody(requestHasBeenRun: $requestHasBeenRun, responseData: $responseData)
-                            .tabItem { Text("Body") }.tag(1)
-                        ResponseHeaders(responseData: $responseData).tabItem { Text("Headers") }.tag(2)
+                        if responseData.contentTypeIsRenderable {
+                            ResponseRenderView(
+                                request: $request,
+                                responseData: $responseData
+                            )
+                            .tabItem { Text("Preview") }.tag(1)
+                            .padding()
+                        }
+                        ResponseRawView(responseData: $responseData)
+                            .tabItem { Text("Raw") }
+                            .tag(2)
+                        ResponseHeaders(responseData: $responseData).tabItem { Text("Headers") }.tag(3)
+                        
                     }
                 )
             }.frame(minWidth: 500)
+                .padding()
         }
     }
 }
 
 #Preview {
-    ResponseDetailView(requestHasBeenRun: .constant(true), responseData: .constant(ResponseData(body: sampleBody, response: sampleResponse)))
+    ResponseDetailView(
+        request: .constant(requests[0]),
+        requestHasBeenRun: .constant(true),
+        responseData: .constant(
+            ResponseData(
+                body: sampleSvgData,
+                response: sampleRenderableResponse
+            )
+        )
+    )
 }

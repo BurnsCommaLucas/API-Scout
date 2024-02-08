@@ -25,49 +25,6 @@ struct RequestList: View {
             }
         }.navigationTitle("Requests")
             .frame(minWidth: 200)
-        //🤔
-//        Table($allRequests,
-//              //            of: Request,
-//              columns: {
-//            TableColumn("") { $r in
-//                NavigationLink {
-//                    RequestDetailView(
-//                        request: $r,
-//                        requestHasBeenRun: $requestHasBeenRun,
-//                        responseData: $responseData
-//                    )
-//                } label: {
-//                    Text(r.method.rawValue).foregroundStyle(r.method.color)
-//                }
-//            }
-//            TableColumn("") { $r in
-//                NavigationLink {
-//                    RequestDetailView(
-//                        request: $r,
-//                        requestHasBeenRun: $requestHasBeenRun,
-//                        responseData: $responseData
-//                    )
-//                } label: {
-//                    Text(r.name == "" ? "New Request" : r.name)
-//                }
-//            }
-//    }, rows: {
-//        ForEach($allRequests) { $r in
-//            TableRow(r)
-//            NavigationLink {
-//                RequestDetailView(
-//                    request: $r,
-//                    requestHasBeenRun: $requestHasBeenRun,
-//                    responseData: $responseData
-//                )
-//            } label: {
-//                //                        RequestRow(request: r)
-//            }
-//        }
-//        }
-//    )
-//        .alternatingRowBackgrounds(.disabled)
-//        .tableColumnHeaders(.hidden)
     }
 }
 

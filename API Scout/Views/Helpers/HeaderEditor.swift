@@ -50,6 +50,11 @@ struct HeaderEditor: View {
             }
         }
         .padding()
+        .onAppear(perform: {
+            if request.headers.isEmpty {
+                request.headers.append(HeaderEntry())
+            }
+        })
     }
     
     private func addHeader() {

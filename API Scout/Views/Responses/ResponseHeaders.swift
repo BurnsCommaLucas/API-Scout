@@ -11,7 +11,6 @@ struct ResponseHeaders: View {
     @Binding var responseData: ResponseData
     
     @State private var selectedRows = Set<UUID>()
-    @State private var sortOrder = [KeyPathComparator(\HeaderEntry.name)]
     
     var body: some View {
         
@@ -23,18 +22,9 @@ struct ResponseHeaders: View {
                 a.id < b.id
             }
             
-//            let clipboard = NSPasteboard.general
-            
             Table(headerArray, selection: $selectedRows) {
                 TableColumn("Name", value: \.name)
                 TableColumn("Value", value: \.value)
-//                TableColumn("") { e in
-//                    Button {
-//                        clipboard.setString("\(e.id): \(e.value)", forType: .string)
-//                    } label: {
-//                        Label("Copy", systemImage: "doc.on.doc").labelStyle(.iconOnly)
-//                    }
-//                }
             }
             .textSelection(.enabled)
             .font(monoFont)
@@ -46,5 +36,5 @@ struct ResponseHeaders: View {
 }
 
 #Preview {
-    ResponseHeaders(responseData: .constant(ResponseData(body: sampleBody, response: sampleResponse)))
+    ResponseHeaders(responseData: .constant(ResponseData(body: sampleBodyData, response: sampleResponse)))
 }

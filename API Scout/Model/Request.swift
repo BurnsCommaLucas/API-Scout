@@ -16,4 +16,9 @@ struct Request: Hashable, Codable, Identifiable {
     var bodyData: String = ""
     var headers: [HeaderEntry] = [HeaderEntry()]
     // TODO auth
+    
+    /// Extract base url (domain + method if available) from full url string
+    var baseUrl: String? {
+        url.firstMatch(of: /^.+?[^\/:](?=[?\/]|$)/)?.base
+    }
 }

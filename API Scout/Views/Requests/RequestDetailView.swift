@@ -16,25 +16,25 @@ struct RequestDetailView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                if editingRequestTitle {
-                    TextField("Request Name", text: $request.name)
-                } else {
-                    Text(request.name == "" ? "New Request" : request.name)
-                        .font(.title3)
-                    Spacer()
+            Form {
+                HStack {
+                    if editingRequestTitle {
+                        TextField("", text: $request.name)
+                    } else {
+                        Text(request.name == "" ? "New Request" : request.name)
+                            .font(.title3)
+                        Spacer()
+                    }
+                    
+                    
+                    Button{
+                        editingRequestTitle.toggle()
+                    } label: {
+                        Label("Edit Request Name", systemImage: "pencil")
+                            .labelStyle(.iconOnly)
+                    }
                 }
                 
-                
-                Button{
-                    editingRequestTitle.toggle()
-                } label: {
-                    Label("Edit Request Name", systemImage: "pencil")
-                        .labelStyle(.iconOnly)
-                }
-            }
-            
-            HStack {
                 Picker("Method:", selection: $request.method) {
                     ForEach(HTTPMethod.allCases) { method in
                         Text(method.rawValue)
@@ -42,19 +42,21 @@ struct RequestDetailView: View {
                     }
                 }
                 
-                TextField("URL", text: $request.url)
-                Button()
-                {
-                    RequestRunner(
-                        selectedRequest: $request,
-                        requestHasBeenRun: $requestHasBeenRun,
-                        responseContents: $responseContents
-                    ).run()
-                } label: {
-                    Label("Send", systemImage: "paperplane")
-                        .labelStyle(.iconOnly)
+                HStack {
+                    TextField("URL:", text: $request.url)
+                    Button() {
+                        RequestRunner(
+                            selectedRequest: $request,
+                            requestHasBeenRun: $requestHasBeenRun,
+                            responseContents: $responseContents
+                        ).run()
+                    } label: {
+                        Label("Send", systemImage: "paperplane")
+                            .labelStyle(.iconOnly)
+                    }
+                    .help("")
+                    .keyboardShortcut(KeyboardShortcut(KeyEquivalent.return, modifiers: EventModifiers.command))
                 }
-                .keyboardShortcut(KeyboardShortcut(KeyEquivalent.return, modifiers: EventModifiers.command))
             }
             TabView(selection: $selectedTab,
                     content:  {
@@ -76,8 +78,8 @@ struct RequestDetailView: View {
 
 #Preview{
     RequestDetailView(
-        request: .constant(Request(bodyData: sampleJson)),
+        request: .constant(Request(bodyType: .JSON, bodyData: sampleJson)),
         requestHasBeenRun: .constant(true),
-        responseContents: .constant(ResponseData(body: sampleBody, response: sampleResponse))
-    )
+        responseContents: .constant(ResponseData(body: sampleBodyData, response: sampleResponse))
+    ).environmentObject(GeneralSettings())
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CodeEditor
 
 enum BodyType: String, Codable, CaseIterable, Identifiable{
     case
@@ -35,5 +36,15 @@ enum BodyType: String, Codable, CaseIterable, Identifiable{
             return nil
         }
     }
+    
+    var codeEditorLanguage: CodeEditor.Language {
+        switch self {
+        case .JSON:
+            return .json
+        default:
+            return .markdown
+        }
+    }
+    
     var id: Self { self }
 }

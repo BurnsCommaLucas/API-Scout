@@ -22,30 +22,14 @@ struct StatusCode: View {
             }
             HStack {
                 // This should probably just be an AttributedString, I went way overboard
-                Text("\(safeCode)")
-                    .foregroundStyle(.black)
+                Text("\(safeCode) \(desc.uppercased())")
+                    .foregroundStyle(.white)
                     .background(
-                        Rectangle()
+                        RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
                             .fill(safeCode < 400 ? .green : .red)
-                            .padding([.top, .bottom], -8)
-                            .padding(.leading, -9)
+                            .padding(-9)
                     )
-                    .fontWeight(.heavy)
-                    .padding([.top, .leading, .bottom])
-                Text(desc)
-                    .foregroundStyle(.black)
-                    .background(
-                        Rectangle()
-                            .fill(safeCode < 400 ? .green : .red)
-                            .padding([.top, .bottom], -8)
-                            .padding(.trailing, -9)
-                            .padding(.leading, -4)
-                    )
-                    .fontWeight(.medium)
-                    .textCase(.uppercase)
-                    .padding([.top, .trailing, .bottom])
-                    .padding(.leading, -4)
-            }
+            }.padding()
         }
     }
 }

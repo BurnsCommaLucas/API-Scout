@@ -24,9 +24,16 @@ struct API_ScoutApp: App {
     }()
 
     var body: some Scene {
+        let generalSettings = GeneralSettings()
         WindowGroup {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+        .environmentObject(generalSettings)
+        
+        Settings {
+            SettingsView()
+        }
+        .environmentObject(generalSettings)
     }
 }
