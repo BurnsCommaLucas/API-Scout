@@ -1,30 +1,33 @@
 //
 //  RequestDetailView.swift
-//  apiBoss
+//  API Scout
 //
 //  Created by Lucas on 1/31/24.
 //
 
 import SwiftUI
+import SwiftData
 
 struct RequestDetailView: View {
-    @Binding var requestHasBeenRun: Bool
-    @Binding var responseContents: ResponseData
+    @Environment(\.modelContext) var modelContext
+    
     @State private var editingRequestTitle: Bool = false
     @State private var selectedTab: Int = 1
-    @EnvironmentObject var request: Request
+    
+    @Bindable var activeRequest: Request
     
     var body: some View {
         VStack {
             Form {
+                // MARK: Request Title
                 HStack {
                     if editingRequestTitle {
-                        TextField("", text: $request.name)
+                        TextField("", text: $activeRequest.name)
                             .onSubmit {
                                 editingRequestTitle.toggle()
                             }
                     } else {
-                        Text(request.name == "" ? "New Request" : request.name)
+                        Text(/*requestState.*/activeRequest.name == "" ? "New Request" : /*requestState.*/activeRequest.name)
                             .font(.title3)
                         Spacer()
                     }
@@ -38,54 +41,43 @@ struct RequestDetailView: View {
                     }
                 }
                 
-                Picker("Method:", selection: $request.method) {
+                // MARK: Request base info
+                Picker("Method:", selection: $activeRequest.method) {
                     ForEach(HTTPMethod.allCases) { method in
                         Text(method.rawValue)
                             .foregroundColor(method.color)
                     }
                 }
                 
+                // MARK: The go button
                 HStack {
-                    TextField("URL:", text: $request.url)
-                    Button() {
-                        RequestRunner(
-                            selectedRequest: request,
-                            requestHasBeenRun: $requestHasBeenRun,
-                            responseContents: $responseContents
-                        ).run()
-                    } label: {
-                        Label("Send", systemImage: "paperplane")
-                            .labelStyle(.iconOnly)
-                    }
-                    .help("")
-                    .keyboardShortcut(KeyboardShortcut(KeyEquivalent.return, modifiers: EventModifiers.command))
+                    TextField("URL:", text: $activeRequest.url)
+                    RunRequestButton(activeRequest: activeRequest)
                 }
             }
+            
+            // MARK: Request detail info
             TabView(selection: $selectedTab,
                     content:  {
                 BodyEditorView(
-                    selectedBodyType: $request.bodyType,
-                    selectedBodyData: $request.bodyData
+                    selectedBodyType: $activeRequest.bodyType,
+                    selectedBodyData: $activeRequest.bodyData
                 )
                 .tabItem { Text("Body") }.tag(1)
                 // TODO: Auth
-//                Text("Tab Content 2").tabItem { Text("Auth") }.tag(2)
+                //                Text("Tab Content 2").tabItem { Text("Auth") }.tag(2)
                 // TODO: Query param parsing/building
-//                Text("Tab Content 3").tabItem { Text("Query") }.tag(3)
-                HeaderEditor().tabItem { Text("Headers") }.tag(4)
+                //                Text("Tab Content 3").tabItem { Text("Query") }.tag(3)
+                HeaderEditor(headerEntries: $activeRequest.headers).tabItem { Text("Headers") }.tag(4)
             })
-        }
-        .padding()
-        .frame(minWidth: 500)
+        }.padding()
     }
 }
 
 
 #Preview{
-    RequestDetailView(
-        requestHasBeenRun: .constant(true),
-        responseContents: .constant(ResponseData(body: sampleBodyData, response: sampleResponse))
-    )
-    .environmentObject(GeneralSettings())
-    .environmentObject(Request(id: "", name: "", method: .GET, url: "", bodyType: .JSON, bodyData: sampleJson, headers: []))
+    
+    @State var activeRequest = Request()
+    return RequestDetailView(activeRequest: activeRequest)
+        .environmentObject(EditorSettings())
 }

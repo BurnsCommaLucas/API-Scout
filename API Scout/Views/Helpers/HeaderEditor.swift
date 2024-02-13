@@ -11,16 +11,17 @@ import Highlightr
 
 struct HeaderEditor: View {
     @State private var selectedRow: UUID? = nil
-    @FocusState private var focus: Bool
-    @EnvironmentObject var request: Request
-    @EnvironmentObject var generalSettings: GeneralSettings
+    
+    @EnvironmentObject var generalSettings: EditorSettings
     @Environment(\.colorScheme) var colorScheme
+    
+    @Binding var headerEntries: [HeaderEntry]
     
     var body: some View {
         VStack {
             ScrollView{
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.fixed(15)), GridItem(.fixed(30))]) {
-                    // Headers
+                    // Headers (haha)
                     Text("Name")
                     Text("Value")
                     Spacer()
@@ -29,7 +30,7 @@ struct HeaderEditor: View {
                     // Body
                     // TODO: Show the auth header inline here
                     // TODO: Show the content type header inline here
-                    ForEach($request.headers) { $h in
+                    ForEach($headerEntries) { $h in
                         // TODO: Make these blend in with the editor styles
                         TextField(text: $h.name, label: {})
                             .font(monoFont)
@@ -58,35 +59,31 @@ struct HeaderEditor: View {
         }
         .padding()
         .onAppear(perform: {
-            if request.headers.isEmpty {
-                request.headers.append(HeaderEntry())
+            if headerEntries.isEmpty {
+                headerEntries.append(HeaderEntry())
             }
         })
     }
     
     private func addHeader() {
-        request.headers.append(HeaderEntry())
+        headerEntries.append(HeaderEntry())
     }
     
     private func removeHeader() {
         if let selectedRowButForReal = selectedRow {
-            request.headers.removeAll { h in
+            headerEntries.removeAll { h in
                 h.id == selectedRowButForReal
             }
         }
     }
 }
 
-struct HeaderEditor_Previews : PreviewProvider{
-    @State static var headers = [
+#Preview {
+    @State var headers = [
         HeaderEntry(name: "Content-Type", value: "application/json"),
         HeaderEntry(name: "User-Agent", value: "API-Scout")
     ]
-    static var previews: some View {
-        HeaderEditor()
-            .environmentObject(Request(
-                id: "", name: "", method: .POST, url: "", bodyType: .PLAIN, bodyData: "", headers: headers
-            ))
-            .environmentObject(GeneralSettings())
-    }
+    
+    return HeaderEditor(headerEntries: $headers)
+            .environmentObject(EditorSettings())
 }

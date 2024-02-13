@@ -12,14 +12,14 @@ struct ResponseRawView: View {
     var responseData: ResponseData
 
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var generalSettings: GeneralSettings
+    @EnvironmentObject var editorSettings: EditorSettings
     
     var body: some View {
         if let decodedBody = responseData.decodedBody {
             CodeEditor(
                 source: .constant(decodedBody),
                 language: responseData.contentTypeLanguage,
-                theme: generalSettings.currentThemeName(colorScheme: colorScheme),
+                theme: editorSettings.currentThemeName(colorScheme: colorScheme),
                 flags: .defaultViewerFlags
             )
             .padding()
@@ -31,5 +31,5 @@ struct ResponseRawView: View {
 
 #Preview {
     ResponseRawView(responseData: ResponseData(body: sampleSvgData))
-        .environmentObject(GeneralSettings())
+        .environmentObject(EditorSettings())
 }

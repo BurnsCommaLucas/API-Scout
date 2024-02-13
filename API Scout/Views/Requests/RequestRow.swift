@@ -1,6 +1,6 @@
 //
 //  RequestRow.swift
-//  apiBoss
+//  API Scout
 //
 //  Created by Lucas on 1/31/24.
 //
@@ -24,10 +24,10 @@ struct RequestRow: View {
     Group {
         RequestRow(request: Request())
         RequestRow(request: Request(
-            id: "", name: "Hit Endpoint", method: .POST, url: "", bodyType: .JSON, bodyData: "", headers: []
+            id: "", name: "Hit Endpoint", method: .POST, url: "", bodyType: .JSON, bodyData: "", headers: [], response: ResponseData()
         ))
         RequestRow(request: Request(
-            id: "", name: "Hit Endpoint", method: .PUT, url: "", bodyType: .JSON, bodyData: "", headers: []
+            id: "", name: "Hit Endpoint", method: .PUT, url: "", bodyType: .JSON, bodyData: "", headers: [], response: ResponseData()
         ))
     }
 }

@@ -22,6 +22,7 @@ struct ResponseHeaders: View {
                 a.name < b.name
             }
             
+            // TODO: Blend with editor styles
             Table(headerArray, selection: $selectedRows) {
                 TableColumn("Name", value: \.name)
                 TableColumn("Value", value: \.value)

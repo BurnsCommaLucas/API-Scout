@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  apiBoss
+//  API Scout
 //
 //  Created by Lucas on 2/2/24.
 //

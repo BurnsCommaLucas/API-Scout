@@ -9,14 +9,14 @@ import SwiftUI
 import CodeEditor
 import WebKit
 
-// FIXME: Invalidate/re-render when request is re-run
+// FIXME: Invalidate/re-render when other renderable request is selected
 struct ResponseRenderView: View {
-    var request: Request?
+    var request: Request
     var responseData: ResponseData
     
     var body: some View {
         if let body = responseData.decodedBody {
-            WebView(renderableContent: body, baseUrl: request?.baseUrl)
+            WebView(renderableContent: body, baseUrl: request.baseUrl)
         }
     }
 }
@@ -24,8 +24,8 @@ struct ResponseRenderView: View {
 #Preview {
     ResponseRenderView(
         request: Request(
-            id: "", name: "", method: .GET, url: "https://img.shields.io", bodyType: .PLAIN, bodyData: "", headers: []
+            id: "", name: "", method: .GET, url: "https://img.shields.io", bodyType: .PLAIN, bodyData: "", headers: [], response: ResponseData()
         ),
-        responseData: ResponseData(body: sampleHtmlData, response: sampleResponse)
+        responseData: ResponseData(body: sampleHtmlData, response: sampleRenderableResponse)
     )
 }

@@ -24,16 +24,26 @@ struct API_ScoutApp: App {
     }()
 
     var body: some Scene {
-        let generalSettings = GeneralSettings()
+        let editorSettings = EditorSettings()
         WindowGroup {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
-        .environmentObject(generalSettings)
+        .environmentObject(editorSettings)
+        .commands {
+            CommandGroup(after: .newItem) {
+                Divider()
+                Button("Save") {
+                    do {
+                        try sharedModelContainer.mainContext.save()
+                    } catch {}
+                }.keyboardShortcut(KeyEquivalent("s"), modifiers: EventModifiers.command)
+            }
+        }
         
         Settings {
             SettingsView()
         }
-        .environmentObject(generalSettings)
+        .environmentObject(editorSettings)
     }
 }

@@ -10,20 +10,21 @@ import SwiftUI
 struct SettingsView: View {
 
     private enum Tabs: Hashable {
-        case general, advanced
+        case general
+        case editor
     }
     var body: some View {
         TabView {
-            GeneralSettingsView()
+            Text("")
                 .tabItem {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
-            Text("")
+            EditorSettingsView()
                 .tabItem {
-                    Label("Advanced", systemImage: "star")
+                    Label("Editor", systemImage: "text.word.spacing")
                 }
-                .tag(Tabs.advanced)
+                .tag(Tabs.editor)
         }
         .padding(20)
         .frame(width: 375, height: 150)
@@ -32,5 +33,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .environmentObject(GeneralSettings())
+        .environmentObject(EditorSettings())
 }

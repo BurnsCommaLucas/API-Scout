@@ -7,11 +7,15 @@
 
 import Foundation
 import CodeEditor
+import SwiftData
 
+//@Model
+//final class ResponseData {
 struct ResponseData {
-    var body: Data?
-    var response: URLResponse?
-    var error: Error?
+    var body: Data? = nil
+    var response: URLResponse? = nil
+    var error: Error? = nil
+    var duration: ContinuousClock.Instant.Duration? = nil
     
     var decodedBody: String? {
         return if body != nil {

@@ -1,6 +1,6 @@
 //
 //  HTTPMethod.swift
-//  apiBoss
+//  API Scout
 //
 //  Created by Lucas on 1/31/24.
 //

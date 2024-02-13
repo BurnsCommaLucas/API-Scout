@@ -1,6 +1,6 @@
 //
 //  BodyEditorView.swift
-//  apiBoss
+//  API Scout
 //
 //  Created by Lucas on 1/31/24.
 //
@@ -10,13 +10,11 @@ import AppKit
 import CodeEditor
 
 struct BodyEditorView: View {
-    
     @Binding var selectedBodyType: BodyType
     @Binding var selectedBodyData: String
-    @State var textVisual: NSAttributedString = NSAttributedString()
     
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var generalSettings: GeneralSettings
+    @EnvironmentObject var editorSettings: EditorSettings
     
     var body: some View {
         VStack{
@@ -30,7 +28,7 @@ struct BodyEditorView: View {
             CodeEditor(
                 source: $selectedBodyData,
                 language: selectedBodyType.codeEditorLanguage,
-                theme: generalSettings.currentThemeName(colorScheme: colorScheme),
+                theme: editorSettings.currentThemeName(colorScheme: colorScheme),
                 flags: .defaultEditorFlags
             )
             .disabled(selectedBodyType == .NONE)
@@ -43,6 +41,6 @@ struct BodyEditorView_Previews : PreviewProvider {
     @State static var bodyType = BodyType.JSON
     static var previews: some View {
         BodyEditorView(selectedBodyType: $bodyType, selectedBodyData: .constant(sampleJson))
-            .environmentObject(GeneralSettings())
+            .environmentObject(EditorSettings())
     }
 }
